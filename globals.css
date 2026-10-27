@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-night-950 text-slate-200 font-sans antialiased;
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(155, 107, 255, 0.16), transparent 60%),
+    radial-gradient(800px 500px at -10% 10%, rgba(34, 229, 255, 0.12), transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(34, 229, 255, 0.35);
+}
+
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-night-800/60 backdrop-blur-md;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition
+      duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan/70 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-neon-cyan text-night-950 shadow-[0_0_28px_-6px_rgba(34,229,255,0.8)] hover:bg-white hover:shadow-[0_0_36px_-4px_rgba(34,229,255,0.9)] active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/5 text-white hover:border-neon-cyan/60 hover:bg-white/10 active:scale-[0.98];
+  }
+  .btn-danger {
+    @apply btn bg-rose-500/90 text-white hover:bg-rose-400;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-night-900/80 px-3.5 py-2.5 text-sm text-white placeholder:text-slate-500
+      outline-none transition focus:border-neon-cyan/70 focus:ring-2 focus:ring-neon-cyan/20;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-slate-300;
+  }
+  .eyebrow {
+    @apply text-sm font-medium text-neon-cyan;
+  }
+  .tbl {
+    @apply w-full text-left text-sm;
+  }
+  .tbl th {
+    @apply whitespace-nowrap border-b border-white/10 px-3 py-2 text-xs font-medium text-slate-400;
+  }
+  .tbl td {
+    @apply border-b border-white/5 px-3 py-2.5 align-top text-slate-200;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-cyan via-white to-neon-violet bg-clip-text text-transparent;
+    background-size: 200% 100%;
+  }
+}
+
+/* One orchestrated moment: blocks claim their place on the hero wall, hold, then release. */
+@keyframes claim {
+  0%, 6% { opacity: 0; transform: scale(0.6); }
+  14% { opacity: 1; transform: scale(1.04); box-shadow: 0 0 30px rgba(34, 229, 255, 0.7); }
+  20%, 78% { opacity: 1; transform: scale(1); box-shadow: 0 0 14px rgba(34, 229, 255, 0.35); }
+  92%, 100% { opacity: 0; transform: scale(1); }
+}
+.hero-claim {
+  opacity: 0;
+  animation: claim 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-claim { opacity: 1; animation: none; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
